@@ -3,6 +3,7 @@ const PDFDocument = require('pdfkit');
 const chalk = require('chalk');
 const inquirer = require('inquirer');
 const fs = require('fs');
+const path = require('path')
 
 operation();
 
@@ -70,9 +71,15 @@ function geraRelatorioSemCliente() {
             return;
         }
 
+        const relatorioPath = path.join(__dirname, 'relatorios');
+
+        if (!fs.existsSync(relatorioPath)) {
+            fs.mkdirSync(relatorioPath);
+        }
+
         const doc = new PDFDocument();
 
-        doc.pipe(fs.createWriteStream('todos-clientes.pdf'));
+        doc.pipe(fs.createWriteStream(path.join(relatorioPath, 'todos-clientes.pdf')));
 
         doc.fontSize(14).text('Resultado:', { underline: true });
 
@@ -118,10 +125,15 @@ function geraRelatorio(codigoCliente) {
                 return;
             }
 
-            const doc = new PDFDocument();
-            
-            doc.pipe(fs.createWriteStream(`cliente-${codigoCliente}.pdf`));
+            const relatorioPath = path.join(__dirname, 'relatorios');
 
+            if (!fs.existsSync(relatorioPath)) {
+                fs.mkdirSync(relatorioPath);
+            }
+
+            const doc = new PDFDocument();
+
+            doc.pipe(fs.createWriteStream(path.join(relatorioPath, `cliente-${codigoCliente}.pdf`)));
             doc.fontSize(14).text('Resultado:', { underline: true });
 
             rows.forEach((row) => {
