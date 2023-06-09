@@ -1,0 +1,22 @@
+{
+  "name": "relatorio-condiconal",
+  "version": "1.0.0",
+  "bin": {
+    "meuexecutavel": "index.js"
+  },
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg index.js --output meuexecutavel"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "pdfkit": "^0.13.0",
+    "chalk": "^4.1.2",
+    "inquirer": "^8.1.2"
+  }
+}
